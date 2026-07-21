@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Readers' Room | Validated Truth</title>
+<meta name="description" content="A space for readers of The Bible — One Book, Two Voices. Answer one question from the book to enter.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../index.html">Validated<em>Truth</em></a>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../preview.html">Read the Preview</a></li>
+        <li><a href="../notes/index.html">Author&rsquo;s Notes</a></li>
+        <li><a href="../buy.html">Where to Buy</a></li>
+        <li><a href="../about.html">About Wally Gee</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       THE GATE  (shown to visitors who have not yet answered)
+       ============================================================ -->
+  <section class="page-head" id="gate">
+    <div class="wrap">
+      <p class="eyebrow">For readers</p>
+      <h1 class="display">The Readers&rsquo; Room</h1>
+      <p class="lede">This space is for people who have read
+      <em>The Bible &mdash; One Book, Two Voices</em>. There is no
+      password and no purchase check &mdash; just one question from the
+      book. If you have read it, the answer is a few seconds away in
+      your own copy. Answer once, and this browser remembers you.</p>
+
+      <div class="checkrow" style="margin-top:2rem;">
+        <p class="eyebrow" style="margin-bottom:0.4rem;">Your question</p>
+        <p id="q-text" style="font-size:1.15rem; margin:0;">Loading&hellip;</p>
+
+        <div style="margin-top:1.4rem; display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center;">
+          <input id="q-answer" type="text" autocomplete="off"
+                 placeholder="Type your answer"
+                 style="flex:1 1 260px; min-width:0; padding:0.7rem 0.9rem;
+                        font-family:inherit; font-size:1rem;
+                        border:1px solid var(--rule,#cbb8a0);
+                        border-radius:6px; background:#fff;">
+          <button class="btn solid" id="q-submit" type="button">Enter</button>
+        </div>
+
+        <p class="check-note" id="q-note" aria-live="polite" style="margin-top:1rem;"></p>
+
+        <p class="meta" style="margin-top:1.2rem;">
+          Different question each time. If one stumps you, just reload
+          the page for another.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE ROOM  (revealed only after a correct answer)
+       This is placeholder content — replace with the real reader
+       area when Phase 3 is built (tallies, discussion, etc.).
+       ============================================================ -->
+  <section id="room" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Welcome in</p>
+      <h2 class="display" style="font-size:clamp(1.7rem,3.5vw,2.4rem); margin-top:0.6rem;">
+        You&rsquo;re a Confirmer.</h2>
+      <div class="prose" style="margin-top:1rem;">
+        <p>This is the readers&rsquo; room. Right now it&rsquo;s a
+        placeholder &mdash; when the reader features are built (tallies,
+        discussion, whatever comes next), they live here, behind this
+        same one-question door.</p>
+        <p>Because you answered, this browser will bring you straight
+        in next time &mdash; no question again on this device.</p>
+      </div>
+      <div style="margin-top:1.6rem;">
+        <button class="btn quiet" id="q-forget" type="button">Sign out of this browser</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="rule"><span>&#10022;</span></div>
+    <div class="tm" style="margin-top:2rem;">
+      <p>&copy; 2026 Validated Truth, LLC. All rights reserved.
+      WallyGee is a publishing imprint of Validated Truth, LLC.</p>
+      <p style="margin-top:0.6rem;">&ldquo;Assumption Is Not
+      Confirmation&rdquo;&trade; is a trademark of Validated Truth,
+      LLC. All Scripture quotations are from the World English Bible
+      (WEB), which is in the public domain.</p>
+      <p class="meta roadmap">This site uses no cookies and no trackers. <a href="../privacy.html">Our Privacy Promise</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   READERS' ROOM GATE  —  Phase 3 working prototype
+   ----------------------------------------------------------------
+   HOW IT WORKS
+   - One question is drawn at random from the pool below.
+   - The visitor types an answer. If it matches (case-insensitive,
+     spaces/punctuation ignored), the gate opens and the room shows.
+   - A small flag is saved in THIS browser so they skip the question
+     next time on this device. Clearing the browser re-asks once.
+
+   HONEST NOTES (read these)
+   - This is a DETERRENT, not a wall. The answers live in this file,
+     so anyone who views page source can read them. That is fine for a
+     social gate whose job is belonging + keeping drive-by non-readers
+     out. Do NOT put anything genuinely private behind it — real
+     privacy needs a server/login, which is a bigger build.
+   - The saved flag is localStorage, NOT a cookie and NOT a tracker:
+     it never leaves the browser and sends nothing anywhere, so it
+     keeps the "no cookies, no trackers" promise. It's just a note the
+     browser keeps to itself.
+
+   HOW TO EDIT THE QUESTIONS  (the only part you normally touch)
+   - Each entry has a "q" (the question) and "a" (accepted answers).
+   - Key questions to STABLE anchors that print AND Kindle share:
+     claim numbers (1–155), chapter/section headings, the fixed
+     sequence. Do NOT key to page numbers — Kindle reflows, so a page
+     number lands differently on every device.
+   - List a few acceptable spellings in "a" so honest readers aren't
+     tripped by formatting (e.g. "Deuteronomy 13", "deut 13", "deut.13").
+   - Keep a POOL and rotate it now and then: once an answer leaks
+     online, that question is spent, but the others still hold.
+
+   >>> THE QUESTIONS BELOW ARE PLACEHOLDERS. Replace with real ones
+   >>> from your book before you link this page anywhere.
+   ================================================================ */
+
+var QUESTIONS = [
+  {
+    q: "EDIT ME — e.g. \u201cWhat is the trademark phrase printed under the title on the cover?\u201d",
+    a: ["assumption is not confirmation"]
+  },
+  {
+    q: "EDIT ME — e.g. \u201cHow many New Testament claims does the book examine?\u201d",
+    a: ["155", "one hundred fifty-five", "one hundred and fifty-five"]
+  },
+  {
+    q: "EDIT ME — e.g. \u201cWhich Bible translation is used throughout the book? (three-letter abbreviation)\u201d",
+    a: ["web", "world english bible"]
+  },
+  {
+    q: "EDIT ME — e.g. \u201cWhat three choices does each question give the reader?\u201d",
+    a: ["yes maybe no", "yes no maybe", "yes, maybe, no"]
+  }
+  /* Add as many as you like. More questions = harder to leak the whole set. */
+];
+
+(function () {
+  var STORE_KEY = "vt_reader_ok";      // the browser flag's name
+  var gate = document.getElementById("gate");
+  var room = document.getElementById("room");
+  var qText = document.getElementById("q-text");
+  var qAnswer = document.getElementById("q-answer");
+  var qSubmit = document.getElementById("q-submit");
+  var qNote = document.getElementById("q-note");
+  var qForget = document.getElementById("q-forget");
+
+  // Normalize: lowercase, strip spaces and punctuation, so honest
+  // formatting differences ("Deut. 13" vs "deut 13") still match.
+  function norm(s) {
+    return String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function openRoom() {
+    gate.hidden = true;
+    room.hidden = false;
+  }
+
+  function showGate() {
+    // Already passed on this browser? Go straight in.
+    var passed = false;
+    try { passed = localStorage.getItem(STORE_KEY) === "1"; } catch (e) {}
+    if (passed) { openRoom(); return; }
+
+    // Otherwise draw one random question from the pool.
+    var current = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+    qText.textContent = current.q;
+
+    function tryAnswer() {
+      var given = norm(qAnswer.value);
+      if (!given) { return; }
+      var ok = current.a.some(function (ans) { return norm(ans) === given; });
+      if (ok) {
+        try { localStorage.setItem(STORE_KEY, "1"); } catch (e) {}
+        openRoom();
+      } else {
+        qNote.textContent =
+          "That\u2019s not the answer from the book \u2014 check your copy, " +
+          "or reload for a different question.";
+      }
+    }
+
+    qSubmit.addEventListener("click", tryAnswer);
+    qAnswer.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { tryAnswer(); }
+    });
+  }
+
+  // "Sign out of this browser" — clears the flag, re-asks next visit.
+  if (qForget) {
+    qForget.addEventListener("click", function () {
+      try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+      location.reload();
+    });
+  }
+
+  showGate();
+})();
+</script>
+
+</body>
+</html>

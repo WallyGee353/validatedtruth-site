@@ -1,0 +1,414 @@
+/* ============================================================
+   ValidatedTruth.com — site styles
+   Design language taken directly from the book:
+   warm ink black, cover gold, EB Garamond body,
+   Encode Sans Condensed display, print-square corners.
+   ============================================================ */
+
+:root {
+  --ink:    #0B0A08;   /* page black, slightly warm like the cover */
+  --panel:  #14120E;   /* raised surfaces */
+  --line:   #2A2721;   /* hairlines on black */
+  --paper:  #EDE9DF;   /* aged-paper text */
+  --ash:    #99938A;   /* captions, meta */
+  --gold:   #C9A227;   /* the cover gold */
+  --bronze: #8A6F4B;   /* statue bronze, hovers */
+  --measure: 66ch;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--paper); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------- type roles ---------- */
+
+.display {
+  font-family: "Encode Sans Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+  color: #FFFFFF;
+}
+
+.eyebrow {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.tagline {
+  font-style: italic;
+  color: var(--paper);
+}
+
+.meta {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--ash);
+}
+
+/* ---------- structure ---------- */
+
+.wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.prose { max-width: var(--measure); }
+.prose p + p { margin-top: 1rem; }
+
+section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
+
+/* the cover's divider: hairline with a gold diamond */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 auto;
+  max-width: 340px;
+}
+.rule::before, .rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.rule::after { background: linear-gradient(90deg, var(--gold), transparent); }
+.rule span { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.3em; }
+
+/* ---------- nav ---------- */
+
+header.site {
+  border-bottom: 1px solid var(--line);
+  background: rgba(11, 10, 8, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+.brand em { color: var(--gold); font-style: normal; }
+
+.nav ul {
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash);
+  padding: 0.3rem 0;
+}
+.nav a:hover { color: var(--paper); }
+.nav a[aria-current="page"] { color: var(--gold); }
+.nav a[aria-current="page"]::before { content: "\2610\00a0"; }
+
+/* ---------- buttons: print-square, outlined ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { background: var(--gold); color: var(--ink); }
+.btn.solid { background: var(--gold); color: var(--ink); }
+.btn.solid:hover { background: #E0BB45; color: var(--ink); }
+.btn.quiet { border-color: var(--line); color: var(--ash); }
+.btn.quiet:hover { border-color: var(--gold); color: var(--gold); background: transparent; }
+
+/* ---------- hero ---------- */
+
+.hero { padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem); }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: center;
+}
+
+.hero h1 { font-size: clamp(2.6rem, 6vw, 4.3rem); }
+.hero .sub {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+  color: var(--paper);
+  margin-top: 0.5rem;
+}
+
+.hero .tagline { margin-top: 1.4rem; font-size: 1.2rem; }
+
+.cover-frame {
+  border: 1px solid var(--line);
+  padding: 10px;
+  background: var(--panel);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+  max-width: 340px;
+  margin-left: auto;
+}
+
+/* ---------- signature: the reader's first checkbox ---------- */
+
+.checkrow {
+  margin-top: 2.2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.6rem;
+  max-width: var(--measure);
+}
+.checkrow p { font-style: italic; margin-bottom: 0.9rem; }
+
+.checks { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: "EB Garamond", serif;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  color: var(--paper);
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+.check .box {
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 1.5px solid var(--paper);
+  display: inline-block;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+.check:hover .box { border-color: var(--gold); }
+.check.marked .box { border-color: var(--gold); }
+.check.marked .box::after {
+  content: "\2713";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+.check-note {
+  margin-top: 0.9rem;
+  color: var(--ash);
+  font-style: italic;
+  font-size: 1rem;
+  min-height: 1.4em;
+}
+
+/* ---------- cards / sections ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.2rem;
+}
+.card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 1.7rem 1.6rem;
+}
+.card h3 {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 0.7rem;
+}
+.card h3::before { content: "\2610"; color: var(--gold); margin-right: 0.55rem; }
+.card p { color: var(--ash); font-size: 1.02rem; }
+.card .btn { margin-top: 1.2rem; }
+
+/* ---------- quote band ---------- */
+
+.band {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  text-align: center;
+}
+.band blockquote {
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  font-style: italic;
+  max-width: 46ch;
+  margin: 0 auto;
+}
+.band cite {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+}
+
+/* ---------- preview page ---------- */
+
+.pdf-shell {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 8px;
+  margin-top: 2rem;
+}
+.pdf-shell iframe {
+  width: 100%;
+  height: min(78vh, 900px);
+  border: 0;
+  background: #1a1a1a;
+}
+.pdf-fallback { padding: 2.2rem 1.5rem; text-align: center; color: var(--ash); }
+
+/* ---------- buy page ---------- */
+
+.editions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.4rem;
+}
+.edition {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.edition .price {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #FFFFFF;
+}
+.edition ul { list-style: none; color: var(--ash); font-size: 1.02rem; }
+.edition li::before { content: "\2610"; color: var(--gold); margin-right: 0.55rem; }
+.edition .btn { margin-top: auto; align-self: flex-start; }
+.soon {
+  display: inline-block;
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  padding: 0.25rem 0.6rem;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+
+/* ---------- notify ---------- */
+
+.notify form {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+  max-width: 540px;
+}
+.notify input[type="email"] {
+  flex: 1;
+  min-width: 220px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-family: "EB Garamond", serif;
+  font-size: 1.05rem;
+  padding: 0.8rem 1rem;
+}
+.notify input[type="email"]::placeholder { color: var(--ash); }
+.notify input[type="email"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* ---------- footer ---------- */
+
+footer.site {
+  border-top: 1px solid var(--line);
+  padding: 2.8rem 0 3.2rem;
+  margin-top: 2rem;
+}
+footer .tm {
+  color: var(--ash);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+footer .roadmap {
+  margin-top: 1.4rem;
+}
+
+/* ---------- page headers ---------- */
+
+.page-head { padding-top: clamp(2.5rem, 6vw, 4rem); }
+.page-head h1 { font-size: clamp(2rem, 4.5vw, 3rem); }
+.page-head .lede { margin-top: 1rem; max-width: var(--measure); color: var(--ash); font-size: 1.15rem; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .cover-frame { margin: 0 auto; order: -1; max-width: 250px; }
+  .hero { text-align: left; }
+}
