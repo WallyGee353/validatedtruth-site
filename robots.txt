@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Unfinished readers' room. It is also marked noindex.
+Disallow: /reader/
+
+Sitemap: https://validatedtruth.com/sitemap.xml

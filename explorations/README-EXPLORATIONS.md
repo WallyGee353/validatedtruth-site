@@ -4,9 +4,8 @@ This subfolder holds speculative "pattern" material, walled off from the
 flagship book pages and clearly labeled as exploration, not proof.
 
 ## Important: it is NOT linked in the main navigation
-The five flagship pages (Home, Preview, Author's Notes, Where to Buy,
-About) were left untouched — none of them link here. So deploying the
-site today leads with the book, and nothing in this folder is visible to
+The public menu (Home, Books, Preview, Genesis, Products, Notes, About,
+Contact) does not link here. Nothing in this folder is visible to
 a visitor unless they have the direct URL:
 `.../explorations/` and `.../explorations/birth-cycle.html`
 

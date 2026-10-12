@@ -1,18 +1,18 @@
 /* ============================================================
    ValidatedTruth.com — site styles
-   Design language taken directly from the book:
+   Design language taken from the book:
    warm ink black, cover gold, EB Garamond body,
-   Encode Sans Condensed display, print-square corners.
+   Encode Sans Condensed display, square corners.
    ============================================================ */
 
 :root {
-  --ink:    #0B0A08;   /* page black, slightly warm like the cover */
-  --panel:  #14120E;   /* raised surfaces */
-  --line:   #2A2721;   /* hairlines on black */
-  --paper:  #EDE9DF;   /* aged-paper text */
-  --ash:    #99938A;   /* captions, meta */
-  --gold:   #C9A227;   /* the cover gold */
-  --bronze: #8A6F4B;   /* statue bronze, hovers */
+  --ink:    #0B0A08;
+  --panel:  #14120E;
+  --line:   #2A2721;
+  --paper:  #EDE9DF;
+  --ash:    #C2B9AC;   /* secondary text, held above WCAG AA on ink and panel */
+  --gold:   #C9A227;
+  --bronze: #8A6F4B;
   --measure: 66ch;
 }
 
@@ -30,17 +30,21 @@ body {
   font-family: "EB Garamond", Georgia, serif;
   font-size: 1.125rem;
   line-height: 1.65;
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
 }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--paper); }
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
 
 /* ---------- type roles ---------- */
 
@@ -56,15 +60,12 @@ a:focus-visible, button:focus-visible {
   font-family: "Encode Sans Condensed", sans-serif;
   font-weight: 500;
   font-size: 0.78rem;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold);
 }
 
-.tagline {
-  font-style: italic;
-  color: var(--paper);
-}
+.tagline { font-style: italic; color: var(--paper); }
 
 .meta {
   font-family: "Encode Sans Condensed", sans-serif;
@@ -74,20 +75,44 @@ a:focus-visible, button:focus-visible {
   color: var(--ash);
 }
 
+.lede {
+  margin-top: 1rem;
+  max-width: var(--measure);
+  color: var(--paper);
+  font-size: 1.2rem;
+}
+
 /* ---------- structure ---------- */
 
 .wrap {
-  max-width: 1060px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .prose { max-width: var(--measure); }
 .prose p + p { margin-top: 1rem; }
+.prose h2 { margin-top: 2rem; }
 
 section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
 
-/* the cover's divider: hairline with a gold diamond */
+.skip {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  transform: translateY(-150%);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 0.7rem 1rem;
+  z-index: 20;
+}
+.skip:focus { transform: none; }
+
 .rule {
   display: flex;
   align-items: center;
@@ -104,112 +129,197 @@ section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
 .rule::after { background: linear-gradient(90deg, var(--gold), transparent); }
 .rule span { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.3em; }
 
+.actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.7rem;
+}
+
 /* ---------- nav ---------- */
 
 header.site {
   border-bottom: 1px solid var(--line);
-  background: rgba(11, 10, 8, 0.92);
+  border-top: 3px solid var(--gold);
+  background: rgba(11, 10, 8, 0.94);
   position: sticky;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.9rem 0;
-  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding: 0.75rem 0;
 }
 
+.nav a.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  color: #FFFFFF;
+  flex: 0 0 auto;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1rem;
+  padding: 0;
+}
 .brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  color: #FFFFFF;
+}
+.brand-name {
   font-family: "Encode Sans Condensed", sans-serif;
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.24em;
-  color: #FFFFFF;
+  font-size: 1.05rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: #FFFFFF;
 }
 .brand em { color: var(--gold); font-style: normal; }
+.brand-tag {
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ash);
+  font-weight: 400;
+}
+.page a { color: #5C4712; text-decoration: underline; text-underline-offset: 0.15em; }
+.page a:hover { color: #111111; }
+.page a.btn { text-decoration: none; color: var(--gold); }
+.page a.btn.solid { color: #FEFEFC; }
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: auto;
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--line);
+  min-height: 44px;
+  padding: 0.4rem 0.85rem;
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.nav-toggle-icon {
+  width: 1rem;
+  height: 0.7rem;
+  background:
+    linear-gradient(var(--paper), var(--paper)) 0 0 / 100% 1.5px no-repeat,
+    linear-gradient(var(--paper), var(--paper)) 0 50% / 100% 1.5px no-repeat,
+    linear-gradient(var(--paper), var(--paper)) 0 100% / 100% 1.5px no-repeat;
+}
 
 .nav ul {
   display: flex;
-  gap: clamp(0.9rem, 3vw, 1.8rem);
+  gap: clamp(0.7rem, 1.6vw, 1.15rem);
   list-style: none;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav a {
   font-family: "Encode Sans Condensed", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ash);
-  padding: 0.3rem 0;
+  padding: 0.45rem 0;
+  display: inline-block;
 }
 .nav a:hover { color: var(--paper); }
-.nav a[aria-current="page"] { color: var(--gold); }
-.nav a[aria-current="page"]::before { content: "\2610\00a0"; }
+.nav a[aria-current="page"] {
+  color: var(--gold);
+  box-shadow: inset 0 -1px 0 var(--gold);
+}
 
-/* ---------- buttons: print-square, outlined ---------- */
+/* ---------- buttons ---------- */
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-family: "Encode Sans Condensed", sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0.85rem 1.6rem;
+  padding: 0.75rem 1.35rem;
   border: 1px solid var(--gold);
   color: var(--gold);
   background: transparent;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .btn:hover { background: var(--gold); color: var(--ink); }
 .btn.solid { background: var(--gold); color: var(--ink); }
 .btn.solid:hover { background: #E0BB45; color: var(--ink); }
 .btn.quiet { border-color: var(--line); color: var(--ash); }
 .btn.quiet:hover { border-color: var(--gold); color: var(--gold); background: transparent; }
+.btn[disabled], .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn[disabled]:hover, .btn:disabled:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
 
 /* ---------- hero ---------- */
 
-.hero { padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem); }
+.hero { padding: clamp(2.8rem, 7vw, 5.2rem) 0 clamp(2.6rem, 6vw, 4.4rem); }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
-  gap: clamp(2rem, 6vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
 
-.hero h1 { font-size: clamp(2.6rem, 6vw, 4.3rem); }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4.4rem); }
+
 .hero .sub {
   font-family: "Encode Sans Condensed", sans-serif;
   font-weight: 500;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   font-size: clamp(0.85rem, 1.8vw, 1.05rem);
   color: var(--paper);
   margin-top: 0.5rem;
 }
 
-.hero .tagline { margin-top: 1.4rem; font-size: 1.2rem; }
+.hero .tagline { margin-top: 1.2rem; font-size: 1.25rem; }
 
 .cover-frame {
   border: 1px solid var(--line);
   padding: 10px;
   background: var(--panel);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
   max-width: 340px;
   margin-left: auto;
 }
+.cover-frame figcaption {
+  padding: 0.75rem 0.35rem 0.25rem;
+  text-align: center;
+  line-height: 1.45;
+}
 
-/* ---------- signature: the reader's first checkbox ---------- */
+/* ---------- signature checkbox ---------- */
 
 .checkrow {
   margin-top: 2.2rem;
@@ -217,21 +327,22 @@ header.site {
   padding-top: 1.6rem;
   max-width: var(--measure);
 }
-.checkrow p { font-style: italic; margin-bottom: 0.9rem; }
+.checkrow > p { font-style: italic; margin-bottom: 0.9rem; }
 
-.checks { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+.checks { display: flex; gap: 0.6rem 1.4rem; flex-wrap: wrap; }
 
 .check {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
+  min-height: 44px;
   font-family: "EB Garamond", serif;
   font-size: 1.1rem;
   background: none;
   border: none;
   color: var(--paper);
   cursor: pointer;
-  padding: 0.2rem 0;
+  padding: 0.2rem 0.15rem;
 }
 .check .box {
   width: 1.05rem;
@@ -239,10 +350,8 @@ header.site {
   border: 1.5px solid var(--paper);
   display: inline-block;
   position: relative;
-  transition: border-color 0.15s ease;
 }
-.check:hover .box { border-color: var(--gold); }
-.check.marked .box { border-color: var(--gold); }
+.check:hover .box, .check.marked .box { border-color: var(--gold); }
 .check.marked .box::after {
   content: "\2713";
   position: absolute;
@@ -253,38 +362,50 @@ header.site {
   font-size: 0.85rem;
 }
 .check-note {
-  margin-top: 0.9rem;
+  margin-top: 0.7rem;
   color: var(--ash);
   font-style: italic;
   font-size: 1rem;
   min-height: 1.4em;
 }
 
-/* ---------- cards / sections ---------- */
+/* Larger hit area on the reader's paper checkboxes. */
+button.wcheck { min-height: 44px; }
+
+/* ---------- cards ---------- */
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.8rem;
 }
 .card {
   border: 1px solid var(--line);
   background: var(--panel);
-  padding: 1.7rem 1.6rem;
+  padding: 1.5rem 1.4rem 1.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
-.card h3 {
+.card h2, .card h3 {
   font-family: "Encode Sans Condensed", sans-serif;
   font-weight: 600;
-  font-size: 1.02rem;
-  letter-spacing: 0.12em;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin-bottom: 0.7rem;
 }
-.card h3::before { content: "\2610"; color: var(--gold); margin-right: 0.55rem; }
-.card p { color: var(--ash); font-size: 1.02rem; }
-.card .btn { margin-top: 1.2rem; }
+.card p { color: var(--ash); font-size: 1.05rem; }
+.card .btn { margin-top: auto; align-self: flex-start; }
+
+.card-kicker {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
 
 /* ---------- quote band ---------- */
 
@@ -295,9 +416,9 @@ header.site {
   text-align: center;
 }
 .band blockquote {
-  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  font-size: clamp(1.25rem, 2.6vw, 1.65rem);
   font-style: italic;
-  max-width: 46ch;
+  max-width: 42ch;
   margin: 0 auto;
 }
 .band cite {
@@ -306,7 +427,7 @@ header.site {
   font-style: normal;
 }
 
-/* ---------- preview page ---------- */
+/* ---------- preview shell (legacy class, kept) ---------- */
 
 .pdf-shell {
   border: 1px solid var(--line);
@@ -322,18 +443,18 @@ header.site {
 }
 .pdf-fallback { padding: 2.2rem 1.5rem; text-align: center; color: var(--ash); }
 
-/* ---------- buy page ---------- */
+/* ---------- editions / products ---------- */
 
 .editions {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.4rem;
-  margin-top: 2.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.15rem;
+  margin-top: 1.8rem;
 }
 .edition {
   border: 1px solid var(--line);
   background: var(--panel);
-  padding: 2rem 1.8rem;
+  padding: 1.7rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -343,72 +464,207 @@ header.site {
   font-weight: 700;
   font-size: 2rem;
   color: #FFFFFF;
+  letter-spacing: 0.02em;
 }
-.edition ul { list-style: none; color: var(--ash); font-size: 1.02rem; }
+.edition ul { list-style: none; color: var(--ash); font-size: 1.05rem; }
+.edition li + li { margin-top: 0.35rem; }
 .edition li::before { content: "\2610"; color: var(--gold); margin-right: 0.55rem; }
 .edition .btn { margin-top: auto; align-self: flex-start; }
+
 .soon {
   display: inline-block;
   font-family: "Encode Sans Condensed", sans-serif;
   font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink);
   background: var(--gold);
-  padding: 0.25rem 0.6rem;
-  margin-left: 0.6rem;
+  padding: 0.28rem 0.55rem;
   vertical-align: middle;
 }
 
-/* ---------- notify ---------- */
-
-.notify form {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-  margin-top: 1.4rem;
-  max-width: 540px;
+.notice {
+  border-left: 3px solid var(--gold);
+  background: var(--panel);
+  padding: 1rem 1.15rem;
+  max-width: 70ch;
 }
-.notify input[type="email"] {
-  flex: 1;
-  min-width: 220px;
+.notice strong { color: #FFFFFF; font-weight: 600; }
+
+.needed {
+  border: 1px dashed var(--bronze);
+  background: rgba(201, 162, 39, 0.06);
+  padding: 1rem 1.1rem;
+  margin-top: 1.1rem;
+  max-width: 70ch;
+}
+.needed-label {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+.needed p + p { margin-top: 0.45rem; }
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+/* ---------- forms ---------- */
+
+.signup, .notify form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin-top: 1.2rem;
+  max-width: 640px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 240px;
+}
+.field label, .signup label {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+input[type="email"], input[type="text"], textarea {
   background: var(--panel);
   border: 1px solid var(--line);
   color: var(--paper);
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", Georgia, serif;
   font-size: 1.05rem;
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 0.9rem;
+  min-height: 44px;
+  width: 100%;
 }
-.notify input[type="email"]::placeholder { color: var(--ash); }
-.notify input[type="email"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+input::placeholder, textarea::placeholder { color: var(--ash); }
+input:disabled, textarea:disabled { opacity: 0.7; }
+
+address {
+  font-style: normal;
+  margin-top: 0.8rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.placeholder-value {
+  display: inline-block;
+  margin-top: 0.45rem;
+  color: var(--gold);
+  border-bottom: 1px dashed var(--bronze);
+  padding-bottom: 0.12rem;
+}
+
+.volume-slots {
+  list-style: none;
+  margin-top: 0.8rem;
+  max-width: 40rem;
+}
+.volume-slots li {
+  border: 1px dashed var(--bronze);
+  padding: 0.75rem 0.9rem;
+  margin-top: 0.55rem;
+}
+.volume-slots .needed-label { display: block; margin-bottom: 0.25rem; }
+
+.edition .price { line-height: 1.15; }
+.edition .price-unknown { font-size: 1.35rem; }
 
 /* ---------- footer ---------- */
 
 footer.site {
   border-top: 1px solid var(--line);
-  padding: 2.8rem 0 3.2rem;
-  margin-top: 2rem;
+  padding: 2.6rem 0 2.8rem;
+  margin-top: 1rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(140px, 0.7fr) minmax(180px, 0.9fr);
+  gap: 1.8rem 2rem;
 }
 footer .tm {
   color: var(--ash);
-  font-size: 0.92rem;
-  line-height: 1.7;
-  max-width: 62ch;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-top: 0.8rem;
+  max-width: 52ch;
 }
-footer .roadmap {
-  margin-top: 1.4rem;
+footer .roadmap { margin-top: 1rem; }
+footer nav ul { list-style: none; }
+footer nav li + li { margin-top: 0.35rem; }
+footer nav a {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+footer nav a:hover { color: var(--paper); }
+footer h2 {
+  font-family: "Encode Sans Condensed", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
 }
 
 /* ---------- page headers ---------- */
 
-.page-head { padding-top: clamp(2.5rem, 6vw, 4rem); }
-.page-head h1 { font-size: clamp(2rem, 4.5vw, 3rem); }
-.page-head .lede { margin-top: 1rem; max-width: var(--measure); color: var(--ash); font-size: 1.15rem; }
+.page-head { padding: clamp(2.4rem, 6vw, 4rem) 0 0; }
+.page-head h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); margin-top: 0.45rem; }
+.page-head + section { padding-top: clamp(1.6rem, 4vw, 2.4rem); }
+
+/* Reader pages set their own paper color. Keep native controls light there. */
+.page, .page button, .page input { color-scheme: light; }
+
+/* Tallies on small screens can scroll instead of squeezing the verse text. */
+article.page:has(table.tally) { overflow-x: auto; }
 
 /* ---------- responsive ---------- */
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
+  .nav { flex-wrap: wrap; }
+  .nav-toggle { display: inline-flex; }
+  .nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+    padding: 0.25rem 0 0.4rem;
+    border-top: 1px solid var(--line);
+  }
+  .nav.is-open ul { display: flex; }
+  .nav ul a {
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav a[aria-current="page"] { box-shadow: none; }
   .hero-grid { grid-template-columns: 1fr; }
-  .cover-frame { margin: 0 auto; order: -1; max-width: 250px; }
-  .hero { text-align: left; }
+  .cover-frame { margin: 0 auto; max-width: 260px; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .brand-name { letter-spacing: 0.12em; font-size: 0.95rem; }
+  .brand-tag { max-width: 12rem; font-size: 0.84rem; }
 }

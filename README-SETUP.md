@@ -3,22 +3,28 @@
 This folder is your complete website. Follow these steps once and the
 site is live. Total time: about 30 minutes.
 
+The public pages are Home, Books, the free Preview, the Genesis series,
+Products, Author's Notes, About, Contact, and the Privacy Promise.
+`buy.html` only sends people to Books, so old links keep working.
+
+Kindle and paperback Amazon links are already filled in on `books.html`:
+
+- Kindle: https://www.amazon.com/dp/B0H6KM5ST9
+- Paperback: https://www.amazon.com/dp/B0HCX6V38Q
+
+If a listing address ever changes, edit those two links in `books.html`.
+Do not change the `CNAME` file, or the DNS records in Part 2, unless you
+mean to move the domain.
+
 ---
 
 ## BEFORE YOU START — one edit to make
 
-When the book goes LIVE on Amazon:
+Nothing is required before the book can be linked. Both Amazon buttons
+on the Books page already go to the listings above.
 
-1. Open `buy.html` in Notepad (right-click → Open with → Notepad)
-2. Find the TWO lines that say `href="#"` (they have a TODO comment
-   above them)
-3. Replace `#` with the full Amazon link to your book
-   (copy it from your browser's address bar on the Amazon page)
-4. Save the file
-
-Do the Kindle one now; do the paperback one when the paperback
-publishes. Until then the paperback button says "Available shortly" —
-that is intentional.
+The email box on the Genesis page is switched off until you connect it.
+See "LATER — optional activations" at the bottom.
 
 ---
 
@@ -91,10 +97,11 @@ there.
 
 ## LATER — optional activations
 
-**Email list:** create a free Mailchimp account → make a signup form →
-copy the form's POST URL → open `index.html` → find
-`data-endpoint=""` → paste the URL between the quotes. The "Stay
-informed" section appears automatically.
+**Email list:** create a free Mailchimp (or Buttondown) account → make a
+signup form → copy the form's POST URL → open `genesis.html` → find
+`data-endpoint=""` → paste the URL between the quotes, and remove
+`disabled` from the email box and the Notify button. Until you do that,
+the box does not collect an address.
 
 **Updating the site:** edit the file on your computer, then in GitHub
 open the same file → click the pencil icon → paste the new content →
