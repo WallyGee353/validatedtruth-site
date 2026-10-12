@@ -563,6 +563,29 @@ code {
   font-size: 0.92em;
 }
 
+.placeholder-value {
+  display: inline-block;
+  margin-top: 0.45rem;
+  color: var(--gold);
+  border-bottom: 1px dashed var(--bronze);
+  padding-bottom: 0.12rem;
+}
+
+.volume-slots {
+  list-style: none;
+  margin-top: 0.8rem;
+  max-width: 40rem;
+}
+.volume-slots li {
+  border: 1px dashed var(--bronze);
+  padding: 0.75rem 0.9rem;
+  margin-top: 0.55rem;
+}
+.volume-slots .needed-label { display: block; margin-bottom: 0.25rem; }
+
+.edition .price { line-height: 1.15; }
+.edition .price-unknown { font-size: 1.35rem; }
+
 /* ---------- footer ---------- */
 
 footer.site {

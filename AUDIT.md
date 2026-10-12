@@ -231,31 +231,32 @@ Explorations stay unlinked. The reader prototype stays unlinked and
 `noindex`. Their menus were updated so a person who has the URL is not
 looking at the old five-link bar.
 
+## Price check, October 12, 2026
+
+Read from Amazon that day. Not copied from the old site.
+
+- Paperback, ASIN B0HCX6V38Q, `https://www.amazon.com/dp/B0HCX6V38Q`:
+  **$19.99**, in stock, ISBN-13 979-8996028801, 316 pages, publication
+  date July 26, 2026. The same paperback was the only hit in an Amazon
+  search for ISBN 9798996028801, also at $19.99.
+- Kindle, ASIN B0H6KM5ST9: `https://www.amazon.com/dp/B0H6KM5ST9` and
+  the ebook-style address both returned “not found.” No Kindle price
+  was on the paperback page, and the ISBN search did not list a Kindle
+  edition. The site no longer prints a Kindle price, and it no longer
+  says the book is in Kindle Unlimited.
+
 ## What Wayne still needs to supply
 
-Nothing below was invented to fill the gap. The pages mark it on the
-site as “Needed from Wayne.”
+Must, before a publish OK:
 
-1. Confirm the public prices: Kindle $9.99, paperback $19.99, and
-   “Included in Kindle Unlimited.” Amazon is the price a buyer pays.
-2. Genesis: series title if it has one, how many volumes, each volume’s
-   title and a sentence on what it covers. A date only if he wants one
-   printed.
-3. Email: a Mailchimp or Buttondown form POST address, pasted into
-   `data-endpoint` on `genesis.html`, then remove `disabled` from the
-   box and the button. Instructions are in `README-SETUP.md`.
-4. Contact: a public email, and a phone number only if he wants one.
-   The street address is already published.
-5. Products, in his own words: who each one is for, what the person
-   receives, what it will not do, and whether it is paper, a PDF, or
-   software. His preferred “not legal or financial advice” sentence for
-   ValidatorPro. A price only when he is ready to charge it.
-6. Optional About extras: a few sentences on Woodward Drilling and the
-   turn toward this work, and a photograph he has the rights to.
-7. Optional: a wide share image, about 1200×630, so a pasted link does
-   not crop the portrait cover.
-8. Still open from the earlier notes, not part of the new pages:
-   exploration images he has rights to, a WEB diff of that essay before
-   it is linked, and real reader-room questions before that prototype
-   is linked. Do not put anything private behind the reader gate. The
-   answers are in the file.
+1. Genesis volume titles, in order. The lines on `genesis.html` are
+   blanks, not names.
+2. The public contact email. The contact page shows
+   `[public contact email]` until he replaces it.
+3. His own OK to publish. This pull request is not merged.
+
+Optional, and not required for that OK: a Mailchimp or Buttondown
+address for the Genesis form, a phone number, product wording, a photo,
+a wide share image, a working Kindle URL if the ASIN above should stay,
+exploration images, and real questions before the readers’ room is
+linked.
